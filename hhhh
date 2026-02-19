@@ -1,0 +1,131 @@
+   });
+        /*Light Box*/
+  const overlay = document.querySelector('.galleryOverlay');
+  const lightboxImg = document.querySelector('.imgBox img');
+  const imgBoxImg = document.querySelector('.imgBox img');
+  const galleryImages = document.querySelectorAll('.galary-images');
+
+//    image click
+  galleryImages.forEach(img => {
+    img.addEventListener('click', () => {
+      overlay.style.display = 'flex';
+      lightboxImg.src = img.src;
+      imgBoxImg.src = img.src;
+    });
+  });
+
+//    overlay ya click
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay || e.target === imgBoxImg.parentElement) {
+      overlay.style.display = 'none';
+    }
+  });
+  /*slider logic*/
+const nextBtn = document.querySelector('.next');
+const prevBtn = document.querySelector('.previous');
+
+let currentIndex = 0;
+let images = [];
+galleryImages.forEach((img, index) => {
+  images.push(img.src);
+
+  img.addEventListener('click', () => {
+    currentIndex = index;
+    showImage();
+    overlay.style.display = 'flex';
+  });
+
+});
+function showImage() {
+  lightboxImg.src = images[currentIndex];
+}
+nextBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  currentIndex++;
+
+  if (currentIndex >= images.length) {
+    currentIndex = 0;
+  }
+
+  showImage();
+});
+prevBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  currentIndex--;
+
+  if (currentIndex < 0) {
+    currentIndex = images.length - 1;
+  }
+
+  showImage();
+});
+overlay.addEventListener('click', (e) => {
+  if (e.target === overlay) {
+    overlay.style.display = 'none';
+  }
+});
+/*Key Board Arrow*/
+document.addEventListener('keydown', (e) => {
+    if (overlay.style.display !== 'flex') return;
+    if (e.key === 'ArrowRight') {
+
+        currentIndex++;
+    if (currentIndex >= images.length) {
+        currentIndex = 0;
+    }
+    showImage();
+    }
+    if(e.key === 'ArrowLeft') {
+        currentIndex--;
+    if (currentIndex < 0) {
+        currentIndex = images.length -1;
+    }
+    showImage();
+    }
+    if (e.key === 'Escape') {
+        overlay.style.display = 'none';
+    }
+});
+ {
+                id: 1,
+                title: "Gothic Blackletter",
+                category: ["Complex", "Western"],
+                desc: "A dense, angular style used in medieval manuscripts. Also known as Old English.",
+                img: "https://picsum.photos/seed/gothic/400/300"
+            },
+            {
+                id: 2,
+                title: "Thuluth Script",
+                category: ["Complex", "Arabic"],
+                desc: "Elegant and grandiose, characterized by curved letters and intersecting lines.",
+                img: "https://picsum.photos/seed/arabic/400/300"
+            },
+            {
+                id: 3,
+                title: "Faux Calligraphy",
+                category: ["Easy", "Kids"],
+                desc: "The best way to start. Write in cursive, then thicken the downstrokes.",
+                img: "https://picsum.photos/seed/faux/400/300"
+            },
+            {
+                id: 4,
+                title: "Modern Brush Lettering",
+                category: ["Easy", "Western"],
+                desc: "Bouncy and playful, perfect for greeting cards and social media posts.",
+                img: "https://picsum.photos/seed/brush/400/300"
+            },
+            {
+                id: 5,
+                title: "Copperplate",
+                category: ["Complex", "Western"],
+                desc: "Fine lines with elaborate loops and flourishes, written with a pointed nib.",
+                img: "https://picsum.photos/seed/copper/400/300"
+            },
+            {
+                id: 6,
+                title: "Kaishu (Oriental)",
+                category: ["Complex", "Oriental"],
+                desc: "Regular script, the standard model for Chinese characters.",
+                img: "https://picsum.photos/seed/chinese/400/300"
+            }
+        ];

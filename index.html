@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickCalligraphy | Master the Art</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Herr+Von+Muellerhoff&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+   
+</head>
+<body>
+    <div class="galleryOverlay">
+    <div class="imgBox" src="lightbox image">
+        <span class="slider previous"> < </span>
+        <img src="img16.jpg">
+        <span class="slider next">></span>
+    </div>
+    </div>
+    <div class="theme-switch-wrapper" onclick="toggleTheme()" title="Toggle Dark Mode">
+        <span class="theme-icon">🌓</span>
+    </div>
+
+    <header>
+    <div class="container">
+    <nav>
+    <a href="#home" class="logo">QuickCalligraphy</a>
+    <ul class="nav-links" id="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li>
+        <a href="#styles">Styles ▾</a>
+        <ul class="submenu">
+            <li><a href="#Show All" onclick="filterGallery('all')">All Styles</a></li>
+            <li><a href="#Western" onclick="filterGallery('Western')">Western</a></li>
+            <li><a href="#Arabic" onclick="filterGallery('Arabic')">Arabic</a></li>
+            </ul>
+            </li>
+            <li><a href="#practice-area">Practice Pad</a></li>
+            <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger" onclick="document.getElementById('nav-links').classList.toggle('active')">☰</div>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <h1 class="hero-title">The Art of <span>Beautiful Writing</span></h1>
+                    <p class="hero-desc">
+                        Unlock the secrets of calligraphy. From the ancient origins of ink to modern digital lettering, discover integrity, harmony, and creative fire.
+                    </p>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; @media(min-width: 992px){justify-content: flex-start;}">
+                        <a href="#practice-area" class="btn">Start Drawing</a>
+                        <a href="#about" class="btn btn-outline">Learn History</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <svg class="pen-anim-svg" viewBox="0 0 400 400">
+                        <circle cx="200" cy="200" r="150" stroke="var(--accent-gold)" stroke-width="1" fill="none" opacity="0.2" />
+                        <circle cx="200" cy="200" r="100" stroke="var(--accent-gold)" stroke-width="1" fill="none" opacity="0.1" />
+                        
+                        <path class="ink-path" d="M 120,250 C 120,250 180,320 220,180 C 260,40 340,40 350,100 C 360,160 300,280 220,300 C 140,320 100,220 140,160 C 180,100 280,80 320,140" />
+                        
+                        <circle class="ink-drip" cx="350" cy="100" r="6" fill="var(--bg-ink)" opacity="0.8" />
+                        <circle cx="120" cy="250" r="3" fill="var(--bg-ink)" opacity="0.6" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <div class="about-card">
+                <h2 class="section-title">Origins & Essence</h2>
+                <p style="margin-bottom: 20px; font-size: 1.1rem; color: var(--text-muted);">
+                    Calligraphy is not just writing; it is the arrangement of beautiful symbols by hand. 
+                    It requires skills for positioning and inscribing words to exhibit <strong>integrity, harmony, ancestry, rhythm, and creative fire</strong>.
+                </p>
+                <p style="font-size: 1.1rem; color: var(--text-muted);">
+                    The word itself comes from the Greek <em>kalli</em> (beautiful) and <em>graphia</em> (writing). 
+                    QuickCalligraphy is designed to bridge the gap between ancient tradition and modern application, 
+                    providing tools for everyone from hobbyists to professional graphic designers.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="practice-area">
+        <div class="container">
+            <h2 class="section-title">Interactive Practice Pad</h2>
+            <p style="text-align: center; margin-bottom: 20px; color: var(--text-muted);">Trace the letter or practice freehand. Your art is saved automatically!</p>
+            
+            <div class="toolbar">
+                <button class="tool-btn active" onclick="setTool('pen', 4, '#2c3e50')">Fine Pen</button>
+                <button class="tool-btn" onclick="setTool('brush', 12, '#c5a059')">Gold Brush</button>
+                <button class="tool-btn" onclick="setTool('eraser', 20, '#ffffff')">Eraser</button>
+                <button class="tool-btn" onclick="clearCanvas()">Clear Pad</button>
+                <button class="tool-btn" onclick="saveArt()">Download</button>
+            </div>
+
+            <div class="canvas-container" id="canvas-wrapper">
+                <div class="overlay-text">Aa</div>
+                <canvas id="practice-canvas"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <section id="styles">
+        <div class="container">
+            <h2 class="section-title">Styles & Categories</h2>
+            
+            <div class="filters">
+                <button class="filter-btn active" onclick="filterGallery('all')">Show All</button>
+                <button class="filter-btn" onclick="filterGallery('easy')">Easy (Kids)</button>
+                <button class="filter-btn" onclick="filterGallery('complex')">Complex (Elders)</button>
+                <button class="filter-btn" onclick="filterGallery('Western')">Western</button>
+                <button class="filter-btn" onclick="filterGallery('Arabic')">Arabic</button>
+            </div>
+
+            <div class="gallery-grid" id="gallery-container">
+            </div>
+        </div>
+    </section>
+    <!-- Galary -->
+    <section id="gallery">
+<div class="container">
+<h2 class="section-title">Gallery</h2>
+<div class="gallery-grid">
+<img class="galary-images" src="img/calligraphy-image.jpg" alt="Gallery Image">
+<img class="galary-images" src="img/img19.jpg" alt="Gallery Image">
+<img class="galary-images" src="img/img18.jpg" alt="Gallery Image">
+<img class="galary-images" src="img/img17.jpg" alt="Gallery Image">
+<img class="galary-images" src="img/img16.jpg" alt="Gallery Image">
+<img class="galary-images" src="img/img15.jpg" alt="Gallery Image">
+<img class="galary-images" src="img/calligraphy-image1.jpg" alt="Gallery Image">
+<img class="galary-images" src="img/img13.jpg" alt="Gallery Image">
+<img class="galary-images" src="img/img12.jpg" alt="Gallery Image">
+<img class="galary-images" src="img/img11.jpg" alt="Gallery Image">
+<img class="galary-images" src="img/img10.jpg" alt="Gallery Image">
+<img class="galary-images" src="img/img9.jpg"  alt="Gallery Image">
+</div>
+
+</div>
+</section>
+
+
+    <section id="contact">
+        <div class="container">
+            <div class="contact-layout">
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    <p style="opacity: 0.8; margin-bottom: 30px;">Have questions about our lessons or want to commission a piece?</p>
+                    
+                    <p><strong>Studio Location:</strong><br>123 Artisan Way, Design District</p>
+                    
+                    <div style="margin-top: 30px;">
+                        <button class="btn" style="width: 100%; background: var(--accent-gold); border: none;" onclick="getLocation()">Find My Coordinates</button>
+                        <div id="geo-result" class="geo-status">
+                            <div id="geo-msg">Locating...</div>
+                            <div id="geo-coords" style="margin-top: 10px; font-family: monospace;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form-wrapper">
+                    <h3>Send Feedback</h3>
+                    <form id="feedbackForm" onsubmit="submitFeedback(event)">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea class="form-control" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <a href="#" class="footer-logo">QuickCalligraphy</a>
+            <div class="footer-links" style="margin-bottom: 20px;">
+                <a href="#" style="color: inherit; text-decoration: none; margin: 0 10px;">Privacy</a>
+                <a href="#" style="color: inherit; text-decoration: none; margin: 0 10px;">Terms</a>
+            </div>
+            <div class="copyright">&copy; 2023 QuickCalligraphy. All Rights Reserved.</div>
+        </div>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>
